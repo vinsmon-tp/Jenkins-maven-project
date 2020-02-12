@@ -11,7 +11,7 @@ public class TestCalc {
 	Calculator calc = new Calculator();
 	@Test
 	public void test() {
-		assertEquals(20, calc.addTwoNumbers(15, 5));
+		assertEquals(20, calc.addTwoNumbers(10, 10));
 		assertEquals(10, calc.subtractTwoNumbers(15, 5));
 	}
 
