@@ -1,30 +1,24 @@
 pipeline {
  agent any
+
  stages {
-  stage('Clone from git') {
+  stage('Get code from Git') {
    steps {
     git 'https://github.com/vinsmon-tp/Jenkins-maven-project.git'
    }
   }
-  stage('clean') {
+  stage('Build') {
    steps {
-    bat "mvn clean"
+    bat "mvn clean install"
    }
-  }
-  stage('test') {
-   steps {
-    bat "mvn test"
-   }
-  }
-  stage('package') {
-   steps {
-    bat "mvn package"
-   }
-  }
-  post {
-   success {
-    junit '**/target/surefire-reports/TEST-*.xml'
-    archiveArtifacts 'target/*.jar'
+
+   post {
+    // If Maven was able to run the tests, even if some of the test
+    // failed, record the test results and archive the jar file.
+    success {
+     junit '**/target/surefire-reports/TEST-*.xml'
+     archiveArtifacts 'target/*.jar'
+    }
    }
   }
  }
