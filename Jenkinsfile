@@ -7,29 +7,18 @@ pipeline {
     git 'https://github.com/vinsmon-tp/Jenkins-maven-project.git'
    }
   }
-  stage('clean') {
+  stage('Build') {
    steps {
-    bat "mvn clean"
-   }
-  }
-  stage('test') {
-   steps {
-    bat "mvn test"
-   }
-  }
-  stage('package') {
-   steps {
-    bat "mvn package"
+    bat "mvn clean install"
    }
    post {
-   // If Maven was able to run the tests, even if some of the test
-   // failed, record the test results and archive the jar file.
-   success {
-    junit '**/target/surefire-reports/TEST-*.xml'
-    archiveArtifacts 'target/*.jar'
+    // If Maven was able to run the tests, even if some of the test
+    // failed, record the test results and archive the jar file.
+    success {
+     junit '**/target/surefire-reports/TEST-*.xml'
+     archiveArtifacts 'target/*.jar'
+    }
    }
   }
-  }
  }
-}
 }
