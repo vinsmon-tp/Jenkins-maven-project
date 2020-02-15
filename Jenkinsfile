@@ -9,7 +9,7 @@ pipeline {
   }
   stage('Build') {
    steps {
-    bat "mvn clean install"
+    bat "mvn clean test install"
    }
    post {
     // If Maven was able to run the tests, even if some of the test
