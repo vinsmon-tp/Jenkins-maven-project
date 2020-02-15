@@ -6,7 +6,6 @@ pipeline {
       git 'https://github.com/vinsmon-tp/Jenkins-maven-project.git'
    }
   }
- }
  stage('clean') {
   steps {
    bat "mvn clean"
